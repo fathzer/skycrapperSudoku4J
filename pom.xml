@@ -12,6 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <customized.jar.name>skyscrapper-solver</customized.jar.name>
   </properties>
   
   <dependencies>
@@ -27,4 +28,31 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+    <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.4.1</version>
+          <configuration>
+            <finalName>${customized.jar.name}</finalName>
+            <minimizeJar>false</minimizeJar>
+            <transformers>
+              <transformer
+                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>com.fathzer.skycrapper.Main</mainClass>
+              </transformer>
+            </transformers>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
 </project>

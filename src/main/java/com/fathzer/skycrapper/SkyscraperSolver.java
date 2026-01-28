@@ -17,7 +17,6 @@ public class SkyscraperSolver {
     public static final int DIRECTION_UP = 2;
     public static final int DIRECTION_DOWN = 3;
 
-
     private final int n; // Taille de la grille (typiquement 4, 5, 6, ou 9)
     private final ISolver solver;
     private int nextVar = 1; // Prochain numéro de variable SAT
@@ -451,39 +450,5 @@ public class SkyscraperSolver {
         }
         
         return solution;
-    }
-    
-    /**
-     * Exemple d'utilisation
-     */
-    public static void main(String[] args) {
-        try {
-            int N = 4;
-            SkyscraperSolver solver = new SkyscraperSolver(N);
-            
-            // Exemple de contraintes (grille 4x4)
-            // Format: setVisibilityConstraint(direction, ligne, nb_visible)
-            solver.setVisibilityConstraint(0, 0, 2); // Ligne 0, depuis gauche: 2 visibles
-            solver.setVisibilityConstraint(1, 0, 2); // Ligne 0, depuis droite: 2 visibles
-            // ... etc
-            
-            // Résolution
-            int[][] solution = solver.solve();
-            
-            if (solution != null) {
-                System.out.println("Solution trouvée:");
-                for (int i = 0; i < N; i++) {
-                    for (int j = 0; j < N; j++) {
-                        System.out.print(solution[i][j] + " ");
-                    }
-                    System.out.println();
-                }
-            } else {
-                System.out.println("Pas de solution");
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
